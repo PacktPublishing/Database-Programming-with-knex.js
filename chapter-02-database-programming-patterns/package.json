@@ -1,0 +1,54 @@
+{
+  "name": "chapter-02",
+  "version": "1.0.0",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "Igor Savin",
+      "email": "kibertoad@gmail.com"
+    }
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest --config=jest.config.json",
+    "test:coverage": "jest --config=jest.config.json --coverage",
+    "test:ci": "npm run lint && npm run test:coverage",
+    "lint": "eslint --format codeframe \"src/**/*.ts\"",
+    "prettier": "prettier --write \"src/**/*.ts\" index.ts",
+    "prepublishOnly": "npm run build",
+    "db:start": "docker-compose -f docker-compose.yml up --build -d postgres && docker-compose -f docker-compose.yml up waitpostgres",
+    "db:stop": "docker-compose -f docker-compose.yml down"
+  },
+  "dependencies": {
+    "pg": "^8.2.1",
+    "pg-promise": "^10.5.6"
+  },
+  "devDependencies": {},
+  "jest": {
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "statements": 85,
+        "branches": 75,
+        "functions": 90,
+        "lines": 85
+      }
+    }
+  },
+  "homepage": "http://github.com/kibertoad/canned-enterprise-node",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kibertoad/canned-enterprise-node.git"
+  },
+  "keywords": [
+    "typescript",
+    "template"
+  ],
+  "files": [
+    "README.md",
+    "LICENSE",
+    "dist/*"
+  ]
+}
