@@ -20,7 +20,7 @@
     "prepublishOnly": "npm run build",
     "db:start": "docker-compose -f docker-compose.yml up --build -d postgres && docker-compose -f docker-compose.yml up waitpostgres",
     "db:stop": "docker-compose -f docker-compose.yml down",
-    "db:migrate": "ts-node db/initScript.ts"
+    "db:rebuild": "ts-node db/initScript.ts"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
