@@ -1,4 +1,5 @@
-import { config } from 'dotenv'
+import dotenv from 'dotenv'
+const { config } = dotenv
 
 // We load DB config from .env file for development purposes. In real production system usually env variables will be populated using different mechanism, such as Kubernetes secrets.
 // Using dotenv allows us to minimize differences in configuration code between production and development systems
@@ -10,8 +11,8 @@ export function getDbConfig() {
   return {
     host: getMandatory('DB_HOST'),
     port: getOptionalInteger('DB_PORT', 5432),
-    database: getOptional('DB_DATABASE', 'postgre'),
-    user: getMandatory('DB_USER'),
+    database: getOptional('DB_DATABASE', 'postgres'),
+    user: getOptional('DB_USER', 'postgres'),
     password: getNullable('DB_PASSWORD', undefined),
   }
 }

@@ -1,6 +1,6 @@
 import PgPromise from 'pg-promise'
 import * as pg from 'pg-promise/typescript/pg-subset'
-import { getDbConfig } from './config'
+import { getDbConfig } from './config.js'
 
 const pgPromiseOptions: PgPromise.IInitOptions = {}
 const pgPromise = PgPromise(pgPromiseOptions)

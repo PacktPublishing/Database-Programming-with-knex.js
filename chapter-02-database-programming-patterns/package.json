@@ -20,7 +20,7 @@
     "prepublishOnly": "npm run build",
     "db:start": "docker-compose -f docker-compose.yml up --build -d postgres && docker-compose -f docker-compose.yml up waitpostgres",
     "db:stop": "docker-compose -f docker-compose.yml down",
-    "db:migrate": "ts-node "
+    "db:migrate": "node --loader ts-node/esm.mjs db/initScript.ts"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
@@ -28,6 +28,11 @@
     "pg-promise": "^10.5.7"
   },
   "devDependencies": {
-    "ts-node": "^8.10.2"
+    "ts-node": "^8.10.2",
+    "typescript": "3.9.6"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=12.17.0"
   }
 }
