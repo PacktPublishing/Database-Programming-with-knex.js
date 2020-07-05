@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "module": "ES2020",
-    "target": "ES2020",
+    "module": "CommonJS",
+    "target": "ES2018",
     "sourceMap": true,
     "declaration": true,
     "declarationMap": false,

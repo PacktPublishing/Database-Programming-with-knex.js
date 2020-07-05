@@ -1,6 +1,6 @@
 import PgPromise from 'pg-promise'
 import * as pg from 'pg-promise/typescript/pg-subset'
-import { getDbConfig } from './config.js'
+import { getDbConfig } from './config'
 
 const pgPromiseOptions: PgPromise.IInitOptions = {}
 const pgPromise = PgPromise(pgPromiseOptions)
@@ -26,6 +26,10 @@ export async function checkDbHeartbeat(): Promise<HeartbeatCheckResult> {
       error,
     }
   }
+}
+
+export function closeConnection() {
+  pgPromise.end()
 }
 
 export { dbConnection }

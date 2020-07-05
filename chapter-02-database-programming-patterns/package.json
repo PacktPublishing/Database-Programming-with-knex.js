@@ -12,7 +12,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "test": "jest --config=jest.config.json",
+    "test": "jest --config=jest.config.json --runInBand",
     "test:coverage": "jest --config=jest.config.json --coverage",
     "test:ci": "npm run lint && npm run test:coverage",
     "lint": "eslint --format codeframe \"src/**/*.ts\"",
@@ -20,18 +20,20 @@
     "prepublishOnly": "npm run build",
     "db:start": "docker-compose -f docker-compose.yml up --build -d postgres && docker-compose -f docker-compose.yml up waitpostgres",
     "db:stop": "docker-compose -f docker-compose.yml down",
-    "db:migrate": "node --loader ts-node/esm.mjs db/initScript.ts"
+    "db:migrate": "ts-node db/initScript.ts"
   },
   "dependencies": {
+    "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
     "pg": "^8.2.1",
     "pg-promise": "^10.5.7"
   },
   "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "jest": "^26.1.0",
     "ts-node": "^8.10.2",
     "typescript": "3.9.6"
   },
-  "type": "module",
   "engines": {
     "node": ">=12.17.0"
   }
