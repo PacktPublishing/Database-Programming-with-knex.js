@@ -56,9 +56,6 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-chapter-02-database-programming-patterns/.env
-
 # next.js build output
 .next
 .idea
