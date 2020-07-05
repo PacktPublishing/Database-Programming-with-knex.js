@@ -19,36 +19,15 @@
     "prettier": "prettier --write \"src/**/*.ts\" index.ts",
     "prepublishOnly": "npm run build",
     "db:start": "docker-compose -f docker-compose.yml up --build -d postgres && docker-compose -f docker-compose.yml up waitpostgres",
-    "db:stop": "docker-compose -f docker-compose.yml down"
+    "db:stop": "docker-compose -f docker-compose.yml down",
+    "db:migrate": "ts-node "
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "pg": "^8.2.1",
-    "pg-promise": "^10.5.6"
+    "pg-promise": "^10.5.7"
   },
-  "devDependencies": {},
-  "jest": {
-    "collectCoverage": true,
-    "coverageThreshold": {
-      "global": {
-        "statements": 85,
-        "branches": 75,
-        "functions": 90,
-        "lines": 85
-      }
-    }
-  },
-  "homepage": "http://github.com/kibertoad/canned-enterprise-node",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/kibertoad/canned-enterprise-node.git"
-  },
-  "keywords": [
-    "typescript",
-    "template"
-  ],
-  "files": [
-    "README.md",
-    "LICENSE",
-    "dist/*"
-  ]
+  "devDependencies": {
+    "ts-node": "^8.10.2"
+  }
 }

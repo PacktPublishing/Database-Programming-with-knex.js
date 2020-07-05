@@ -1,17 +1,11 @@
 import PgPromise from 'pg-promise'
 import * as pg from 'pg-promise/typescript/pg-subset'
+import { getDbConfig } from './config'
 
 const pgPromiseOptions: PgPromise.IInitOptions = {}
 const pgPromise = PgPromise(pgPromiseOptions)
 
-const connectionOptions: pg.IConnectionParameters = {
-  host: 'localhost',
-  port: 25432,
-  database: 'testdb',
-  user: 'testuser',
-  password: 'testpass',
-}
-
+const connectionOptions: pg.IConnectionParameters = getDbConfig()
 const dbConnection = pgPromise(connectionOptions)
 
 export type HeartbeatCheckResult = {
