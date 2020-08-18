@@ -57,6 +57,32 @@ export async function updatePassword(userId: number, newPassword: string): Promi
   return result.rowCount
 }
 
+// This is anti-pattern, do not use
+export async function updateUser(
+  userId: number,
+  updatedUser: Partial<CreateUserModel>
+): Promise<number> {
+  const userFields = [...Object.entries(updatedUser)]
+  const updateFragment = userFields.reduce((result, [key, value], index) => {
+    if (index > 0) {
+      result += ','
+    }
+    result += `"${key}" = $${2 + index}`
+    return result
+  }, '')
+  const values = [userId, ...userFields.map(([key, value]) => value)]
+
+  const result = await dbConnection.result(
+    `
+  UPDATE users_service.users
+  SET ${updateFragment}
+  WHERE "userId" = $1; 
+`,
+    values
+  )
+  return result.rowCount
+}
+
 export async function softDeleteUser(userId: number): Promise<number> {
   const result = await dbConnection.result(
     `

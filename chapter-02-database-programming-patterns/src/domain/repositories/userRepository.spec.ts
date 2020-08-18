@@ -1,4 +1,10 @@
-import { createUser, fetchCompleteUser, softDeleteUser, updatePassword } from './userRepository'
+import {
+  createUser,
+  fetchCompleteUser,
+  softDeleteUser,
+  updatePassword,
+  updateUser,
+} from './userRepository'
 import { deleteUsers } from '../../__test__/utils/dbCleaner'
 import { closeConnection } from '../../infrastructure/dbConnection'
 import { TEST_USER_1 } from '../../__test__/fixtures/testUsers'
@@ -18,6 +24,26 @@ describe('userRepository', () => {
       expect(result).toEqual({
         userId: 1,
       })
+    })
+  })
+
+  describe('updateUser', () => {
+    it('updates user', async () => {
+      const createUserResult = await createUser(TEST_USER_1)
+      const { userId } = createUserResult
+      const fetchUserResult1 = await fetchCompleteUser(userId)
+
+      const updateUserResult = await updateUser(userId, {
+        firstName: 'User',
+        lastName: 'McUser',
+      })
+      const fetchUserResult2 = await fetchCompleteUser(userId)
+
+      expect(updateUserResult).toBe(1)
+      expect(fetchUserResult1).toBeDefined()
+      expect(fetchUserResult2).toBeDefined()
+      expect(fetchUserResult2!.firstName).toEqual('User')
+      expect(fetchUserResult2!.lastName).toEqual('McUser')
     })
   })
 
